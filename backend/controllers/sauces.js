@@ -27,40 +27,6 @@ exports.getOneSauces = async (req, res, next) => {
   }
 };
 
-// exports.modifySauces = async (req, res, next) => {
-//   try {
-//     const sauce = await Sauces.findOne({ _id: req.params.id });
-
-//     if (!sauce) {
-//       return res.status(404).json({ error: new Error('No such Sauce!') });
-//     }
-
-//     const oldImageUrl = sauce.imageUrl; // Sauvegarde de l'ancienne URL de l'image
-
-//     const saucesObject = req.file
-//       ? {
-//           ...JSON.parse(req.body.sauces),
-//           imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-//         }
-//       : { ...req.body };
-
-//     await Sauces.updateOne({ _id: req.params.id }, { ...saucesObject, _id: req.params.id });
-
-//     if (req.file) {
-//       // Suppression de l'ancienne image si une nouvelle image a été téléchargée
-//       const filename = oldImageUrl.split('/images/')[1];
-//       fs.unlink(`images/${filename}`, (error) => {
-//         if (error) {
-//           console.error("Erreur lors de la suppression de l'ancienne image :", error);
-//         }
-//       });
-//     }
-
-//     res.status(201).json({ message: 'Sauce updated successfully!' });
-//   } catch (error) {
-//     res.status(400).json({ error });
-//   }
-// };
 
 exports.modifySauces = (req, res, next) => {
   Sauces.findOne({ _id: req.params.id }).then((sauces) => {
